@@ -1,26 +1,28 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace Pelmered\LaravelDumper\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use VendorName\Skeleton\SkeletonServiceProvider;
+use Pelmered\LaravelDumper\LaravelDumperServiceProvider;
+use Pelmered\LaravelDumper\Tests\Traits\TestHelpers;
 
 class TestCase extends Orchestra
 {
+    use TestHelpers;
     protected function setUp(): void
     {
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'VendorName\\Skeleton\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Pelmered\\LaravelDumper\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            SkeletonServiceProvider::class,
+            LaravelDumperServiceProvider::class,
         ];
     }
 
@@ -29,7 +31,7 @@ class TestCase extends Orchestra
         config()->set('database.default', 'testing');
 
         /*
-        $migration = include __DIR__.'/../database/migrations/create_skeleton_table.php.stub';
+        $migration = include __DIR__.'/../database/migrations/create_laravel-dumper_table.php.stub';
         $migration->up();
         */
     }
