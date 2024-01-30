@@ -10,6 +10,7 @@ use Pelmered\LaravelDumper\Tests\Traits\TestHelpers;
 class TestCase extends Orchestra
 {
     use TestHelpers;
+
     protected function setUp(): void
     {
         parent::setUp();

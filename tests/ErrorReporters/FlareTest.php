@@ -1,4 +1,5 @@
 <?php
+
 namespace Pelmered\LaravelDumper\Tests\ErrorReporters;
 
 class FlareTest extends \Pelmered\LaravelDumper\Tests\TestCase

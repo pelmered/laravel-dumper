@@ -1,4 +1,5 @@
 <?php
+
 namespace Pelmered\LaravelDumper\ArgumentShorteners;
 
 use Pelmered\LaravelDumper\DataTypes\ShortendArgument;

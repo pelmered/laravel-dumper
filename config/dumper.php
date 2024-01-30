@@ -38,8 +38,7 @@ return [
         ArrayShortener::class,
     ],
 
-
-        /*
+    /*
     'dumpers' => [
             'dump' => [
                 'enabled' => env('LARAVEL_DUMPER_DUMP_ENABLED', true),
@@ -83,9 +82,5 @@ return [
         ],
 
     */
-
-
-
-
 
 ];

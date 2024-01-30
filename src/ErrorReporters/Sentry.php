@@ -1,8 +1,6 @@
 <?php
-namespace Pelmered\LaravelDumper\ErrorReporters;
 
-use Pelmered\LaravelDumper\ErrorReporters\ErrorReporter;
-use Pelmered\LaravelDumper\ErrorReporters\Local;
+namespace Pelmered\LaravelDumper\ErrorReporters;
 
 class Sentry implements ErrorReporter
 {
@@ -14,6 +12,4 @@ class Sentry implements ErrorReporter
 
         return app('sentry')->getLastEventId();
     }
-
-
 }

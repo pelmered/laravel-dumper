@@ -1,4 +1,5 @@
 <?php
+
 namespace Pelmered\LaravelDumper\ArgumentShorteners;
 
 use Illuminate\Database\Eloquent\Model;
@@ -8,7 +9,7 @@ class ModelShortener extends ArgumentShortener
 {
     public function shouldRun(): bool
     {
-        return ($this->argument instanceof Model);
+        return $this->argument instanceof Model;
     }
 
     public function shorten(): ShortendArgument
@@ -21,5 +22,4 @@ class ModelShortener extends ArgumentShortener
             shortener: 'model',
         );
     }
-
 }

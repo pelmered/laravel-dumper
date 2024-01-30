@@ -1,7 +1,7 @@
 <?php
+
 namespace Pelmered\LaravelDumper\Tests;
 
-use Illuminate\Support\Arr;
 use Pelmered\LaravelDumper\DataTypes\TraceFrame;
 use Pelmered\LaravelDumper\LaravelDumper;
 use Pelmered\LaravelDumper\Tests\TestClasses\StdClass;
@@ -9,7 +9,6 @@ use Pelmered\LaravelDumper\Tests\TestClasses\TestModel;
 
 class GetCallerTest extends TestCase
 {
-
     public function calledMethod(...$args)
     {
         return LaravelDumper::getCaller();

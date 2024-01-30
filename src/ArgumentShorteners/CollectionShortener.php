@@ -1,4 +1,5 @@
 <?php
+
 namespace Pelmered\LaravelDumper\ArgumentShorteners;
 
 use Illuminate\Support\Collection;
@@ -8,7 +9,7 @@ class CollectionShortener extends ArgumentShortener
 {
     public function shouldRun(): bool
     {
-        return ($this->argument instanceof Collection);
+        return $this->argument instanceof Collection;
     }
 
     public function shorten(): ShortendArgument

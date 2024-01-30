@@ -1,4 +1,5 @@
 <?php
+
 namespace Pelmered\LaravelDumper\DataTypes;
 
 class TraceFrame

@@ -1,4 +1,5 @@
 <?php
+
 namespace Pelmered\LaravelDumper\ArgumentShorteners;
 
 use Illuminate\Contracts\Support\Arrayable;
@@ -8,7 +9,7 @@ class ArrayShortener extends ArgumentShortener
 {
     public function shouldRun(): bool
     {
-        return (is_array($this->argument) || $this->argument instanceof Arrayable);
+        return is_array($this->argument) || $this->argument instanceof Arrayable;
     }
 
     public function shorten(): ShortendArgument
@@ -28,4 +29,3 @@ class ArrayShortener extends ArgumentShortener
         );
     }
 }
-

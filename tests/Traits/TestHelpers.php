@@ -1,4 +1,5 @@
 <?php
+
 namespace Pelmered\LaravelDumper\Tests\Traits;
 
 trait TestHelpers
@@ -23,6 +24,4 @@ trait TestHelpers
 
         return $this;
     }
-
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Pelmered\LaravelDumper\Tests\Shorteners;
 
 use Illuminate\Http\Request;
@@ -6,7 +7,6 @@ use Pelmered\LaravelDumper\DataTypes\ShortendArgument;
 use Pelmered\LaravelDumper\LaravelDumper;
 use Pelmered\LaravelDumper\Tests\TestCase;
 use Pelmered\LaravelDumper\Tests\TestClasses\ClassWithToString;
-use Pelmered\LaravelDumper\Tests\TestClasses\ComplexStdClass;
 use Pelmered\LaravelDumper\Tests\TestClasses\StdClass;
 use Pelmered\LaravelDumper\Tests\Traits\TestsArgumentShorteners;
 
@@ -21,7 +21,7 @@ class ShortenerTest extends TestCase
         $this->assertShortenedArgument($model, $model->toArray());
     }
     */
-    function testShortenArray()
+    public function testShortenArray()
     {
         $array = [
             'foo' => ['string (scalar)' => 'bar'],
@@ -29,32 +29,35 @@ class ShortenerTest extends TestCase
         ];
         $this->assertShortenedArgument($array, $array, 'array');
     }
-    function testShortenStringable()
+
+    public function testShortenStringable()
     {
         $stringable = new \Illuminate\Support\Stringable('foo');
         $this->assertShortenedArgument($stringable, 'foo');
 
         $this->assertShortenedArgument('foo', new ClassWithToString(), 'stringable');
     }
-    function testShortenString()
+
+    public function testShortenString()
     {
         $string = 'foo';
         $this->assertShortenedArgument($string, $string, 'scalar');
     }
-    function testShortenRequest()
+
+    public function testShortenRequest()
     {
         $request = Request::create(
             uri: 'https://example.com/api/v1/shortener',
             method: 'POST',
             parameters: [
                 'foo' => 'bar',
-                'baz' => 'qux'
+                'baz' => 'qux',
             ],
             server: [
                 'REQUEST_HOST' => 'example.com',
                 'REQUEST_URI' => 'https://example.com/api/v1/shortener',
                 'REQUEST_METHOD' => 'POST',
-                'CONTENT_TYPE' => 'application/json'
+                'CONTENT_TYPE' => 'application/json',
             ],
             content: json_encode([
                 'foo' => 'bar',
@@ -73,27 +76,32 @@ class ShortenerTest extends TestCase
             'request'
         );
     }
-    function testShortenInt()
+
+    public function testShortenInt()
     {
         $int = 1;
         $this->assertShortenedArgument($int, $int, 'scalar');
     }
-    function testShortenFloat()
+
+    public function testShortenFloat()
     {
         $float = 1.1;
         $this->assertShortenedArgument($float, $float, 'scalar');
     }
-    function testShortenBool()
+
+    public function testShortenBool()
     {
         $bool = true;
         $this->assertShortenedArgument($bool, $bool, 'scalar');
     }
-    function testShortenNull()
+
+    public function testShortenNull()
     {
         $null = null;
         $this->assertShortenedArgument(null, $null, 'scalar');
     }
-    function testShortenObject()
+
+    public function testShortenObject()
     {
         $object = new StdClass();
 
@@ -108,15 +116,17 @@ class ShortenerTest extends TestCase
         );
 
     }
-    function testShortenCollection()
+
+    public function testShortenCollection()
     {
         $collection = new \Illuminate\Support\Collection([
             'foo' => 'bar',
-            'baz' => 'qux'
+            'baz' => 'qux',
         ]);
         $this->assertShortenedArgument($collection->all(), $collection, 'Collection');
     }
-    function testShortenCarbon()
+
+    public function testShortenCarbon()
     {
         $carbon = new \Carbon\Carbon();
         $this->assertShortenedArgument($carbon->toDateTimeString(), $carbon, 'Carbon');
@@ -183,10 +193,10 @@ class ShortenerTest extends TestCase
                         ],
                         'test4_' => [
                             'test5' => 'data',
-                        ]
+                        ],
                     ],
                 ],
-            ]
+            ],
         ];
 
         $shortenedArgument = LaravelDumper::shortenArgument($object, 4);
@@ -204,5 +214,4 @@ class ShortenerTest extends TestCase
         $shortenedArgument = LaravelDumper::shortenArgument($object, 0);
         $this->assertEquals('[1]', $shortenedArgument);
     }
-
 }

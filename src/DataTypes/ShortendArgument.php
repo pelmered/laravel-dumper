@@ -1,4 +1,5 @@
 <?php
+
 namespace Pelmered\LaravelDumper\DataTypes;
 
 use Pelmered\LaravelDumper\LaravelDumper;
@@ -11,9 +12,8 @@ class ShortendArgument
         public mixed $originalValue,
         public ?string $type = null,
         public ?string $shortener = null,
-    )
-    {
-        if (!$type) {
+    ) {
+        if (! $type) {
             $this->type = LaravelDumper::getTypeString($originalValue, false);
         }
     }
@@ -29,7 +29,7 @@ class ShortendArgument
             return $this->name;
         }
 
-        return $this->name . (config('dumper.show_type_info') ? ' (' . $this->type . ')' : '');
+        return $this->name.(config('dumper.show_type_info') ? ' ('.$this->type.')' : '');
     }
 
     public function isScalar()

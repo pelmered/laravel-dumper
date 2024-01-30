@@ -4,7 +4,6 @@ namespace Pelmered\LaravelDumper;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Pelmered\LaravelDumper\Commands\LaravelDumperCommand;
 
 class LaravelDumperServiceProvider extends PackageServiceProvider
 {

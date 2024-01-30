@@ -1,7 +1,9 @@
 <?php
+
 namespace Pelmered\LaravelDumper\Tests\Traits;
 
 use Pelmered\LaravelDumper\LaravelDumperServiceProvider;
+
 use function Orchestra\Testbench\workbench_path;
 
 trait UsesDatabase
@@ -19,7 +21,6 @@ trait UsesDatabase
     /**
      * add the package provider
      *
-     * @param $app
      *
      * @return array
      */
@@ -31,8 +32,7 @@ trait UsesDatabase
     /**
      * Define environment setup.
      *
-     * @param \Illuminate\Foundation\Application $app
-     *
+     * @param  \Illuminate\Foundation\Application  $app
      * @return void
      */
     protected function getEnvironmentSetUp($app)
@@ -40,9 +40,9 @@ trait UsesDatabase
         // Setup default database to use sqlite :memory:
         $app['config']->set('database.default', 'testbench');
         $app['config']->set('database.connections.testbench', [
-            'driver'   => 'sqlite',
+            'driver' => 'sqlite',
             'database' => ':memory:',
-            'prefix'   => '',
+            'prefix' => '',
         ]);
     }
 }

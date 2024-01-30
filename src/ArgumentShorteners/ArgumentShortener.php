@@ -1,4 +1,5 @@
 <?php
+
 namespace Pelmered\LaravelDumper\ArgumentShorteners;
 
 use Pelmered\LaravelDumper\DataTypes\ShortendArgument;
@@ -13,9 +14,6 @@ abstract class ArgumentShortener
 
     abstract public function shorten(): ShortendArgument;
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name ?? gettype($this->argument);

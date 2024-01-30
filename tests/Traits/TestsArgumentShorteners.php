@@ -1,15 +1,14 @@
 <?php
+
 namespace Pelmered\LaravelDumper\Tests\Traits;
 
 use Pelmered\LaravelDumper\LaravelDumper;
 
 trait TestsArgumentShorteners
 {
-
-    public function assertShortenedArgument($expected, $argument, string $expectedType = null): void
+    public function assertShortenedArgument($expected, $argument, ?string $expectedType = null): void
     {
         $shortenedArgument = LaravelDumper::shortenArgument($argument);
-
 
         //$value = array_values($shortenedArgument);
         //dd($shortenedArgument, $value, $expected, $argument);

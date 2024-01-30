@@ -1,4 +1,5 @@
 <?php
+
 namespace Pelmered\LaravelDumper\ArgumentShorteners;
 
 use Pelmered\LaravelDumper\DataTypes\ShortendArgument;
@@ -8,7 +9,7 @@ class RequestShortener extends ArgumentShortener
 {
     public function shouldRun(): bool
     {
-        return ($this->argument instanceof Request);
+        return $this->argument instanceof Request;
     }
 
     public function shorten(): ShortendArgument

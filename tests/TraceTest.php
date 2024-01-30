@@ -1,4 +1,5 @@
 <?php
+
 namespace Pelmered\LaravelDumper\Tests;
 
 use Illuminate\Support\Arr;
@@ -8,7 +9,6 @@ use Pelmered\LaravelDumper\Tests\TestClasses\TestModel;
 
 class TraceTest extends TestCase
 {
-
     public function tracedMethod(...$args)
     {
         return LaravelDumper::trace(4);
@@ -25,7 +25,7 @@ class TraceTest extends TestCase
             [
                 '*' => [
                     'file', 'line', 'class', 'method', 'arguments',
-                ]
+                ],
             ],
             Arr::map($trace, function ($frame) {
                 return $frame->toArray();

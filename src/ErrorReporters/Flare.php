@@ -1,8 +1,6 @@
 <?php
-namespace Pelmered\LaravelDumper\ErrorReporters;
 
-use Pelmered\LaravelDumper\ErrorReporters\ErrorReporter;
-use Pelmered\LaravelDumper\ErrorReporters\Local;
+namespace Pelmered\LaravelDumper\ErrorReporters;
 
 class Flare implements ErrorReporter
 {
@@ -16,5 +14,4 @@ class Flare implements ErrorReporter
 
         return $exceptionID;
     }
-
 }

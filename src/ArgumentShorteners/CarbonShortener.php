@@ -1,4 +1,5 @@
 <?php
+
 namespace Pelmered\LaravelDumper\ArgumentShorteners;
 
 use Carbon\Carbon;
@@ -8,7 +9,7 @@ class CarbonShortener extends ArgumentShortener
 {
     public function shouldRun(): bool
     {
-        return ($this->argument instanceof Carbon);
+        return $this->argument instanceof Carbon;
     }
 
     public function shorten(): ShortendArgument

@@ -1,4 +1,5 @@
 <?php
+
 namespace Pelmered\LaravelDumper;
 
 use Illuminate\Support\Arr;
@@ -34,9 +35,9 @@ class LaravelDumper
         $errorReporter = config('dumper.error_reporter');
 
         return match ($errorReporter) {
-            'flare'  => new Flare(),
+            'flare' => new Flare(),
             'sentry' => new Sentry(),
-            default  => is_string($errorReporter) ? new $errorReporter() : Local::class,
+            default => is_string($errorReporter) ? new $errorReporter() : Local::class,
         };
     }
 
@@ -53,19 +54,19 @@ class LaravelDumper
         $exceptionID = static::generateExceptionID();
 
         return $debug || config('app.debug') ? [
-            'message'    => $exception->getMessage(),
-            'error_id'   => $exceptionID,
+            'message' => $exception->getMessage(),
+            'error_id' => $exceptionID,
             'error_code' => method_exists($exception, 'getErrorCode') ? $exception->getErrorCode() : null,
             'debug_data' => method_exists($exception, 'getDebugData') ? print_r($exception->getDebugData(), true) : null,
-            'severity'   => static::getExceptionSeverityString($exception),
-            'exception'  => $exception::class,
-            'file'       => $exception->getFile(),
-            'line'       => $exception->getLine(),
-            'trace'      => collect($exception->getTrace())->map(function ($trace) {
+            'severity' => static::getExceptionSeverityString($exception),
+            'exception' => $exception::class,
+            'file' => $exception->getFile(),
+            'line' => $exception->getLine(),
+            'trace' => collect($exception->getTrace())->map(function ($trace) {
                 return Arr::except($trace, ['args']);
             })->all(),
         ] : [
-            'message'  => static::isHttpException($exception) ? $exception->getMessage() : 'Server Error',
+            'message' => static::isHttpException($exception) ? $exception->getMessage() : 'Server Error',
             'error_id' => $exceptionID,
         ];
     }
@@ -80,7 +81,7 @@ class LaravelDumper
 
     public static function getExceptionSeverityString(Throwable $e): string
     {
-        if (!method_exists($e, 'getSeverity')) {
+        if (! method_exists($e, 'getSeverity')) {
             return '';
         }
 
@@ -139,15 +140,15 @@ class LaravelDumper
             case $callable instanceof \Closure:
                 try {
                     $reflectedFunction = new \ReflectionFunction($callable);
-                    $closureClass      = $reflectedFunction->getClosureScopeClass();
-                    $closureThis       = $reflectedFunction->getClosureThis();
+                    $closureClass = $reflectedFunction->getClosureScopeClass();
+                    $closureThis = $reflectedFunction->getClosureThis();
                 } catch (\ReflectionException $e) {
                     return ['closure' => 'closure'];
                 }
 
                 return [
-                    'closure this'     => $closureThis ? $closureThis::class : $reflectedFunction->name,
-                    'closure scope'    => $closureClass ? $closureClass->getName() : $reflectedFunction->name,
+                    'closure this' => $closureThis ? $closureThis::class : $reflectedFunction->name,
+                    'closure scope' => $closureClass ? $closureClass->getName() : $reflectedFunction->name,
                     'static variables' => static::formatVariablesArray($reflectedFunction->getStaticVariables()),
                 ];
             case \is_object($callable):
@@ -209,7 +210,7 @@ class LaravelDumper
 
     private static function getFrameArguments(Frame $frame): array
     {
-        return Arr::map($frame->arguments, static fn($argument) => static::shortenArgument($argument));
+        return Arr::map($frame->arguments, static fn ($argument) => static::shortenArgument($argument));
     }
 
     public static function shortenArgument($argument, $maxDepth = 3, $currentDepth = null, ?string $name = null)
@@ -225,14 +226,12 @@ class LaravelDumper
             */
         }
 
-
         /** @var ShortendArgument $value */
         $value = static::runShortenerChain($argument, $name);
 
         if ($value->isScalar()) {
             return $value->toDisplay();
         }
-
 
         dump($value->value);
 
@@ -262,7 +261,7 @@ class LaravelDumper
 
     public static function getTypeString($argument, $withFormatting = true): string
     {
-        if (!config('dumper.show_type_info')) {
+        if (! config('dumper.show_type_info')) {
             return '';
         }
 
@@ -274,7 +273,7 @@ class LaravelDumper
         };
 
         if ($typeString) {
-            return $withFormatting ? ' (' . $typeString . ')' : $typeString;
+            return $withFormatting ? ' ('.$typeString.')' : $typeString;
         }
 
         return '';
@@ -282,7 +281,7 @@ class LaravelDumper
 
     public static function isSimpleValue($argument): bool
     {
-        return !is_array($argument) && !is_object($argument);
+        return ! is_array($argument) && ! is_object($argument);
     }
 
     public static function getCount($argument): ?int
