@@ -7,8 +7,8 @@ class TraceFrame
     public function __construct(
         public string $file,
         public int $line,
-        public string $class,
-        public string $method,
+        public ?string $class,
+        public ?string $method,
         public array $arguments = [],
         public ?string $snippet = null,
     ) {
