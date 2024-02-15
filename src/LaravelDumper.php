@@ -246,7 +246,7 @@ class LaravelDumper
         }
 
         $return = [];
-        foreach($value->value as $key => $item) {
+        foreach ($value->value as $key => $item) {
             if (is_scalar($item)) {
                 $return[] = self::returnScalarValue($item, $key);
                 //dump(self::returnScalarValue($item, $key));
@@ -256,6 +256,7 @@ class LaravelDumper
         if (count($return) >= 1) {
             return $return;
         }
+
         //dump($value->value, $maxDepth, $currentDepth);
         return Arr::mapWithKeys(
             $value->value,
@@ -264,11 +265,13 @@ class LaravelDumper
         //return Arr::map($value, fn ($item) => static::shortenArgument($item, $maxDepth, $currentDepth));
     }
 
-    static function returnScalarValue($value, $key = null) {
+    public static function returnScalarValue($value, $key = null)
+    {
         //$key = key($value);
         if (is_int($key)) {
             return $value;
         }
+
         return [$key => $value];
     }
 
