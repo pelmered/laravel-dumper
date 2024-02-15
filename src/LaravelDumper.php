@@ -233,15 +233,43 @@ class LaravelDumper
             return $value->toDisplay();
         }
 
-        dump($value->value);
+        if (count($value->value) === 0) {
+            return [];
+        }
 
-        //dump('loop', $value);
-        //return Arr::map($value->value, fn ($item) => dump($item));
+        if (is_array($value->value) && count($value->value) === 1) {
+            //dump('is_scalar', is_scalar($value->value[0]));
+            $current = current($value->value);
+            if (is_scalar($current)) {
+                self::returnScalarValue($current);
+            }
+        }
+
+        $return = [];
+        foreach($value->value as $key => $item) {
+            if (is_scalar($item)) {
+                $return[] = self::returnScalarValue($item, $key);
+                //dump(self::returnScalarValue($item, $key));
+            }
+        }
+
+        if (count($return) >= 1) {
+            return $return;
+        }
+        //dump($value->value, $maxDepth, $currentDepth);
         return Arr::mapWithKeys(
             $value->value,
             fn ($item, $name) => static::shortenArgument($item, $maxDepth, $currentDepth, $name)
         );
         //return Arr::map($value, fn ($item) => static::shortenArgument($item, $maxDepth, $currentDepth));
+    }
+
+    static function returnScalarValue($value, $key = null) {
+        //$key = key($value);
+        if (is_int($key)) {
+            return $value;
+        }
+        return [$key => $value];
     }
 
     private static function runShortenerChain($argument, ?string $name = null): Scalar|ShortendArgument
