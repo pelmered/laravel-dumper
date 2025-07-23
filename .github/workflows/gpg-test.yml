@@ -10,12 +10,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Configure GPG
+        run: |
+          export GPG_TTY=$(tty)
+
       - name: Import GPG key
         id: import-gpg
         uses: crazy-max/ghaction-import-gpg@v6
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.PASSPHRASE }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
           git_user_signingkey: true
           git_commit_gpgsign: true
 
