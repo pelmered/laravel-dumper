@@ -35,10 +35,5 @@ jobs:
             commit_user_email: ${{ steps.import-gpg.outputs.email }}
             commit_message: "Auto fix code"
             commit_options: '-S'
-            #commit_options: '--amend --no-edit'
-            #push_options: '--force'
-            #commit_options: '--gpg-sign=2214519024DEC883'
-            #  fingerprint=209A4F84CC6A143BE4AE659C2214519024DEC883
-            #commit_options: '--amend --no-edit --gpg-sign'
-            #push_options: '--force'
             skip_fetch: true
+
