@@ -1,0 +1,40 @@
+name: gpg-test
+
+on:
+  push:
+
+jobs:
+  sign-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Import GPG key
+        id: import-gpg
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+
+      - name: Sign commit and push changes
+        run: |
+          echo foo > bar.txt
+
+      -   name: Commit changes
+          uses: stefanzweifel/git-auto-commit-action@v5
+          with:
+            commit_author: "${{ steps.import-gpg.outputs.name }} <${{ steps.import-gpg.outputs.email }}>"
+            commit_user_name: ${{ steps.import-gpg.outputs.name }}
+            commit_user_email: ${{ steps.import-gpg.outputs.email }}
+            commit_message: "Auto fix code"
+            commit_options: '-S'
+            #commit_options: '--amend --no-edit'
+            #push_options: '--force'
+            #commit_options: '--gpg-sign=2214519024DEC883'
+            #  fingerprint=209A4F84CC6A143BE4AE659C2214519024DEC883
+            #commit_options: '--amend --no-edit --gpg-sign'
+            #push_options: '--force'
+            skip_fetch: true
